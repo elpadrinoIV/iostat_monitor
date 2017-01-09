@@ -66,6 +66,10 @@ func (self *StatsManager) Load(data string) error {
 	lines := strings.Split(data, "\n")
 	new_stats := make(map[string]StatsData)
 	for _, line := range lines {
+		line = strings.TrimSpace(line)
+		if len(line) == 0 {
+			continue
+		}
 		m := IOSTAT_LINE_RE.FindStringSubmatch(line)
 		if len(m) != 15 {
 			return fmt.Errorf("Wrong data format: %v", line)
@@ -94,7 +98,7 @@ func (self *StatsManager) Load(data string) error {
 	return nil
 }
 
-var IOSTAT_RE = regexp.MustCompile(`.*util\s*(.*)\s+$`)
+var IOSTAT_RE = regexp.MustCompile(`(?s)^.*util\s*(.*)\s+$`)
 
 func (self *StatsManager) Run(interval_watch uint, interval_exec uint) {
 	log.Infof("Running stats loader. Watch stats during %d seconds. Repeat every %d seconds", interval_watch, interval_exec)
@@ -110,7 +114,11 @@ func (self *StatsManager) Run(interval_watch uint, interval_exec uint) {
 					} else {
 						log.Debug("Stats updated")
 					}
+				} else {
+					log.Error("Invalid output from command")
 				}
+			} else {
+				log.Errorf("Command returned with error: %v", err)
 			}
 		}
 	}()
