@@ -1,6 +1,8 @@
 # Introduction
 This simple program monitors io usage using the `iostat` command and makes them available via SNMP.
 
+The idea was taken from https://github.com/markround/Cacti-iostat-templates
+
 # Usage
 ## Build
 ```bash
@@ -10,6 +12,7 @@ go build
 ## SNMPD configuration
 `iostat_monitors` connects to the snmp daemon via agentX. Snmpd configuration file must have agentX enabled:
 ```conf
+# minimal /etc/snmp/snmpd.conf file
 agentAddress udp:161,udp6:[::1]:161
 
 rocommunity public
