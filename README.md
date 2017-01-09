@@ -26,23 +26,24 @@ The program uses the `iostat` utility, therefore `sysstat` must be installed.
 
 ## Query via snmp
 `iostat_monitor` registers the oid `1.3.6.1.3.1` as base oid.
-|OID | Meaning |
-|-----|--------|
-|BASE.1.DEVICEIDX| Index |
-|BASE.2.DEVICEIDX| Device Name |
-|BASE.3.DEVICEIDX| rrqm/s |
-|BASE.4.DEVICEIDX| wrqm/s |
-|BASE.5.DEVICEIDX| r/s |
-|BASE.6.DEVICEIDX| w/s |
-|BASE.7.DEVICEIDX| rkB/s |
-|BASE.8.DEVICEIDX| wkB/s |
-|BASE.9.DEVICEIDX| avgrq-sz |
-|BASE.10.DEVICEIDX| avgqu-sz |
-|BASE.11.DEVICEIDX| await |
-|BASE.12.DEVICEIDX| r_await |
-|BASE.13.DEVICEIDX| w_await |
-|BASE.14.DEVICEIDX| svctm |
-|BASE.15.DEVICEIDX| %util |
+
+OID | Meaning
+-----|--------
+BASE.1.DEVICEIDX | Index
+BASE.2.DEVICEIDX | Device Name
+BASE.3.DEVICEIDX | rrqm/s
+BASE.4.DEVICEIDX | wrqm/s
+BASE.5.DEVICEIDX | r/s
+BASE.6.DEVICEIDX | w/s
+BASE.7.DEVICEIDX | rkB/s
+BASE.8.DEVICEIDX | wkB/s
+BASE.9.DEVICEIDX | avgrq-sz
+BASE.10.DEVICEIDX | avgqu-sz
+BASE.11.DEVICEIDX | await
+BASE.12.DEVICEIDX | r_await
+BASE.13.DEVICEIDX | w_await
+BASE.14.DEVICEIDX | svctm
+BASE.15.DEVICEIDX | %util
 
 ```bash
 $ snmpget -v2c -Ofn -c public 127.0.0.1 .1.3.6.1.3.1.2.1
